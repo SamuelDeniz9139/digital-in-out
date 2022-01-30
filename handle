@@ -1,0 +1,37 @@
+const int rightPin=2;// pushbutton pin on the right
+const int leftPin=22;// pushbutton pin on the left
+const int outPin=3;  // the LED pin on the right; "pin" is to the right
+const int pinOut=20; // the LED pin on the left; "pin" is to the left
+int rightState=0;
+int leftState=0;
+void setup(){//initialize input/output pins
+  pinMode(outPin,OUTPUT);
+  pinMode(pinOut,OUTPUT);
+  pinMode(rightPin,INPUT);
+  pinMode(leftPin,INPUT);
+}
+void loop(){//reads pushbutton values
+  stateRight=digitalRead(rightPin);
+  stateLeft=digitalRead(leftPin);
+  if (stateLeft==HIGH&&stateRight==HIGH){//both on
+    writeLED(1,1);
+  }else if(stateRight==HIGH){//right on
+    writeLED(1,0);
+  }else if(stateLeft==HIGH){//left on
+    writeLED(0,1)
+  }else{//neither on
+    writeLED(0,0);
+  }
+}
+void writeLED(leftBin,rightBin){//reusable function that does digitalWrite
+    if(leftBin==1){
+      digitalWrite(pinOut,HIGH);
+    }else{
+      digitalWrite(pinOut,LOW);
+    }
+    if(rightBin==1){
+      digitalWrite(outPin,HIGH);
+    }else{
+      digitalWrite(outPin,LOW);
+    }
+}
